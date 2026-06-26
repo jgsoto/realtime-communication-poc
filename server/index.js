@@ -9,13 +9,19 @@ const io = new Server(server);
 app.use(express.static("public"));
 
 io.on("connection", (socket) => {
-    console.log("Usuario conectado:", socket.id);
+    console.log("User connected:", socket.id);
+
+    socket.on("message", (data) => {
+        console.log("Message received:", data);
+
+        io.emit("response", "Server says: Hello client");
+    });
 
     socket.on("disconnect", () => {
-        console.log("Usuario desconectado");
+        console.log("User disconnected");
     });
 });
 
 server.listen(3000, () => {
-    console.log("Servidor en http://localhost:3000");
+    console.log("Server running at http://localhost:3000");
 });
