@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Socket.IO PoC</title>
 </head>
+
 <body>
 
     <h1>Person 1 - WebSocket / Socket.IO</h1>
@@ -16,14 +18,26 @@
     <script>
         const socket = io();
 
+        function addMessage(message) {
+            const output = document.getElementById("output");
+            const p = document.createElement("p");
+            p.innerText = message;
+            output.appendChild(p);
+        }
+
         function sendMessage() {
-            socket.emit("message", "Hello server");
+            const message = "Hello server";
+
+            addMessage("You: " + message);
+
+            socket.emit("message", message);
         }
 
         socket.on("response", (data) => {
-            document.getElementById("output").innerText = data;
+            addMessage(data);
         });
     </script>
 
 </body>
+
 </html>
