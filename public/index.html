@@ -7,9 +7,23 @@
 
     <h1>Person 1 - WebSocket / Socket.IO</h1>
 
-    <button>Send Message</button>
+    <button onclick="sendMessage()">Send Message</button>
 
     <h3 id="output"></h3>
+
+    <script src="/socket.io/socket.io.js"></script>
+
+    <script>
+        const socket = io();
+
+        function sendMessage() {
+            socket.emit("message", "Hello server");
+        }
+
+        socket.on("response", (data) => {
+            document.getElementById("output").innerText = data;
+        });
+    </script>
 
 </body>
 </html>
