@@ -11,12 +11,6 @@ app.use(express.static("public"));
 io.on("connection", (socket) => {
     console.log("Usuario conectado:", socket.id);
 
-    socket.on("mensaje", (data) => {
-        console.log("Mensaje recibido:", data);
-
-        io.emit("respuesta", "Servidor dice: Hola cliente 👋");
-    });
-
     socket.on("disconnect", () => {
         console.log("Usuario desconectado");
     });
